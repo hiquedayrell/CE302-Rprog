@@ -9,6 +9,4 @@ ggplot(data = mpg) +
 #ggplot(data = <DATA>) + 
 #<GEOM_FUNCTION>(mapping = aes(<MAPPINGS))
  
- library(usethis)
-use_git_config(user.name = "hiquedayrell",
-               user.email = "henriquedayrell@ufpr.br")
+#teste de alterações
