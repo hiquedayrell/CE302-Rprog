@@ -116,3 +116,31 @@ notas
 
 append(notas, value = c("carlos" = 9)) #adiciona uma observacao
 append(notas, value = c("anass" = 2), after = 0)
+
+
+
+
+matrix <- matrix(data = c(1,0,0,1), 
+                 nrow = 2, ncol = 2)
+matrix2 <- matrix(data = c(1,1,1,1,0,0,0,0), 
+                 nrow = 4, ncol = 2)
+matrix2
+matrix3 <- matrix(data = c(1,1,1,1,0,0,0,0), 
+                  nrow = 4, ncol = 2, byrow =TRUE) #preenche linha com prioridade
+matrix3
+matrix[1,2] #acessa o valor da cooordenada da matriz
+matrix[2,2]
+matrix2[1:2, 1:2]
+matrix[matrix < 1]
+matrix < 1
+
+
+lista <- list( "num" = 10, "car" = c("Dez"), TRUE, 1+10i)
+lista[[1]]
+lista[[2]]
+
+
+
+str(iris)
+head(iris)
+tail(iris)
