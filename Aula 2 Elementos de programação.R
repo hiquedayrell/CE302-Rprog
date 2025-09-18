@@ -133,6 +133,7 @@ matrix[2,2]
 matrix2[1:2, 1:2]
 matrix[matrix < 1]
 matrix < 1
+matrix[1, ]
 
 
 lista <- list( "num" = 10, "car" = c("Dez"), TRUE, 1+10i)
@@ -144,3 +145,31 @@ lista[[2]]
 str(iris)
 head(iris)
 tail(iris)
+?iris
+
+fator <- factor(c("alta", "baixa", "media", "baixa"))
+
+dados <- data.frame(Letras = letters[1:6], 
+                    Numeros = 1:6,
+                    logico = sample(c(TRUE, FALSE), replace = TRUE))
+dados
+iris[1]
+iris[1,]
+class(x)
+is.na(x)
+
+
+#revisao aula
+search()
+ls("package:datasets")
+getwd()
+dir()
+browseVignettes("ggplot2")
+notas[notas > 7]
+passou <- notas > 7
+names(notas[passou])
+notas
+matriz
+matriz[1,]
+matriz[2,2]
+matriz[matriz >= 3]
