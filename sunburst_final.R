@@ -78,3 +78,4 @@ sunburst(
 browseVignettes("sunburstR")
 vignette(sunburstR)
 hist(dados23$IDADE)
+ 
