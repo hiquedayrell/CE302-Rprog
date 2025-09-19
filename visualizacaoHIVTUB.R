@@ -30,14 +30,16 @@ table(dados23$IDADE)
 
 dados23$faixa_etaria <- cut( #cria uma coluna de faixa etaria
   dados23$IDADE,
-  breaks = c(0, 3, 12, 18, 40, 65, Inf),
+  breaks = c(0, 3, 12, 18, 40, 65, Inf), 
+  include.lowest = TRUE,
   labels = c("Bebe (0-3)",
-             "crianca (4-12,",
-             "adolescente (13-18",
-             "adulto (19-40",
-             "meia-idade (41 - 65",
-             "idoso ( 65+)")
-)
+             "crianca (4-12)",
+             "adolescente (13-18)",
+             "adulto (19-40)",
+             "meia-idade (41 - 64)",
+             "idoso (65+)"),
+  )
+
 table(dados23$faixa_etaria)
 
 dados23$DIAGNOSTICO_HIV <- factor(dados23$HIV, #cria uma coluna nova que indica o resultado do exame trocando os numeros por caracteres
@@ -50,4 +52,26 @@ install.packages("sunburstR")
 library("sunburstR")
 ?sunburst
 #variaveis de interesse, dados23$CS_SEXO, dados23$faixa etaria,  dados23$DIAGNOSTICO_HIV
-w
+
+library("dplyr")
+dados_sequencias <- dados23 %>%#"O operador pipe (%>%, do pacote dplyr) pega o objeto dados23 e “passa” para a próxima função."
+  mutate(sequence = paste(CS_SEXO, faixa_etaria, DIAGNOSTICO_HIV, sep = "-")) %>%#mutate cria ou modifica colunas em um data frame, paste sep junta os valores das variaveis de cada linha em uma unica string, juntando o que cada paciente tem nas tres variaveis em uma string so, ex: homem, adulto, hiv
+  group_by(sequence) %>% #todos que tem a mesma sequencia ficam em um mesmo grupo
+  summarise(size=n(), .groups = "drop") #cria um resumo para cada grupo e conta quantas linhas tem em cada grupo
+
+dados_sequencias
+
+sunburst(
+  data = dados_sequencias,
+  legendOrder = NULL,
+  colors = NULL,
+  valueField = "size",
+  percent = TRUE,
+  count = FALSE,
+  legend = list(),
+  sortFunction = NULL,
+  sumNodes = TRUE,
+  width = NULL,
+  height = NULL,
+)
+
