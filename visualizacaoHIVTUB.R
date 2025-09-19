@@ -50,4 +50,4 @@ install.packages("sunburstR")
 library("sunburstR")
 ?sunburst
 #variaveis de interesse, dados23$CS_SEXO, dados23$faixa etaria,  dados23$DIAGNOSTICO_HIV
-
+w
