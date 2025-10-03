@@ -26,13 +26,39 @@ nas.por.variavel #numeros de dados que estão faltando
 proporcao.nas <- round(nas.por.variavel/nrow(dadosT), 2) #Motra quais variaveis tem menos dados faltantes 
 proporcao.nas
 
-menos0.1 <- proporcao.nas[proporcao.nas < 0.1]
+menos0.1 <- proporcao.nas[proporcao.nas < 0.1] #mostra quais são as colunas que possuem menos de 0.1 de NAS
 menos0.1
 dadosT$TP_NOT
 
-dadosT$FORMA
-table(dadosT$FORMA)
+dadosT$FORMA #mostra em de forma de factor, o tipo de tuberculose, entre pulmonar, extrapulmonar e ambas
 dadosT$FORMA <- as.character(dadosT$FORMA)
-dadosT$FORMA <- as.numeric(dadosT$FORMA)
+dadosT$FORMA <- as.numeric(dadosT$FORMA) #transformam a coluna em numeric, para que eu possa trabalhar com numeros
 hist(dadosT$FORMA)
 
+
+mesa <- table(dadosT$FORMA) #table para visalização
+mesa <- as.data.frame(mesa)
+mesa$proporcao <- mesa$Freq / sum(mesa$Freq) #cria a proporcao de cada uma das linhas do novo dataframe criado
+proporcao <- round(mesa$proporcao, digits = 3) #arredonda para 3 casas a proporcao
+proporcao
+valores <- round(proporcao *100) #numero de pulmoes expostos, de 100
+tipos <- c("Pulmonar", "Extrapulmonar", "Pulmonar + Extrapulmonar") #cria a legenda
+cores <- c("#5F826F", "#A197FF", "#A81D11") #define cores 
+waffle_vec <- rep(seq_along(valores), valores)  # 1,2,3 em vez de labels
+xwdwdawd\awdAWdAWdAWd AWed AWd WAdAWd AWD         
+# Monta matriz 10x10
+waffle_mat <- matrix(waffle_vec, nrow = 10, byrow = TRUE)
+
+# Plot em R base
+plot(1:10, 1:10, type="n", axes=FALSE, xlab="", ylab="", asp=1)
+
+for (i in 1:10) {
+  for (j in 1:10) {
+    rect(j-1, 10-i, j, 11-i,
+         col = cores[waffle_mat[i, j]],
+         border = "white")
+  }
+}
+
+# Legenda
+legend("topright", legend = tipos, fill = cores, bty="n")
