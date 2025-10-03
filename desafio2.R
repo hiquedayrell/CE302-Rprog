@@ -1,0 +1,38 @@
+devtools::install_github("danicat/read.dbc")
+require(read.dbc)
+url <- "http://leg.ufpr.br/~ara/data/TUBEBR22.dbc"
+download.file(url, destfile = "TUBEBR22.dbc", mode = "wb")
+dados22 <- read.dbc("TUBEBR22.dbc")
+dados22
+url <- "http://leg.ufpr.br/~ara/data/TUBEBR23.dbc"
+download.file(url, destfile = "TUBEBR23.dbc", mode = "wb")
+dados23 <- read.dbc("TUBEBR23.dbc")
+url <- "http://leg.ufpr.br/~ara/data/TUBEBR23.dbc"
+download.file(url, destfile = "TUBEBR23.dbc", mode = "wb")
+dados23 <- read.dbc("TUBEBR23.dbc")
+dados23
+url <- "http://leg.ufpr.br/~ara/data/TUBEBR24.dbc"
+download.file(url, destfile = "TUBEBR24.dbc", mode = "wb")
+dados24 <- read.dbc("TUBEBR24.dbc")
+dados24
+
+library(dplyr)
+
+dadosT <- bind_rows(dados22, dados23, dados24) #cria um dataset que contem os tres anos em observacoes
+
+
+nas.por.variavel <- apply(is.na.data.frame(dadosT),2, sum) #numeros de NA por variavel
+nas.por.variavel #numeros de dados que estão faltando
+proporcao.nas <- round(nas.por.variavel/nrow(dadosT), 2) #Motra quais variaveis tem menos dados faltantes 
+proporcao.nas
+
+menos0.1 <- proporcao.nas[proporcao.nas < 0.1]
+menos0.1
+dadosT$TP_NOT
+
+dadosT$FORMA
+table(dadosT$FORMA)
+dadosT$FORMA <- as.character(dadosT$FORMA)
+dadosT$FORMA <- as.numeric(dadosT$FORMA)
+hist(dadosT$FORMA)
+
