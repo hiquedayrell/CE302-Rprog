@@ -1,0 +1,7 @@
+ls()
+search()
+ls("package:datasets")
+devtools::install_github("JaseZiv/worldfootballR")
+library(worldfootballR)
+mapped_players <- player_dictionary_mapping()
+dplyr::glimpse(mapped_players)
