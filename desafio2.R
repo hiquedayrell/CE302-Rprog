@@ -43,22 +43,17 @@ proporcao <- round(mesa$proporcao, digits = 3) #arredonda para 3 casas a proporc
 proporcao
 valores <- round(proporcao *100) #numero de pulmoes expostos, de 100
 tipos <- c("Pulmonar", "Extrapulmonar", "Pulmonar + Extrapulmonar") #cria a legenda
-cores <- c("#5F826F", "#A197FF", "#A81D11") #define cores 
-waffle_vec <- rep(seq_along(valores), valores)  # 1,2,3 em vez de labels
-xwdwdawd\awdAWdAWdAWd AWed AWd WAdAWd AWD         
-# Monta matriz 10x10
-waffle_mat <- matrix(waffle_vec, nrow = 10, byrow = TRUE)
+cores <- c("#5F826F", "#A197FF", "#A81D11") #define cores, de acordo com roda de cores
+waffle_vec <- rep(seq_along(valores), valores)  #permite a repeticao no plot com N vezes pela proporcao definida
+waffle_mat <- matrix(waffle_vec, nrow = 10, byrow = TRUE) #cria a matriz vazia 10x10
 
-# Plot em R base
-plot(1:10, 1:10, type="n", axes=FALSE, xlab="", ylab="", asp=1)
+plot(0:10, 0:10, type="n", axes=FALSE, xlab="", ylab="", asp=1, xaxs="i", yaxs="i") #ajusta os limites para exibicao do grafico e inicia o plot
 
-for (i in 1:10) {
+for (i in 1:10) { #inicia loop para preenchimento da matriz
   for (j in 1:10) {
-    rect(j-1, 10-i, j, 11-i,
-         col = cores[waffle_mat[i, j]],
-         border = "white")
+    symbols(x = j - 0.5, y = 10 - i + 0.5, circles = 0.46, inches = FALSE, #codigo para um circulo, sem uso do ggplot
+            bg = cores[waffle_mat[i, j]], fg = "white", add = TRUE)
   }
 }
+legend("topright", legend = tipos, fill = cores, bty = "n") #adiciona legenda
 
-# Legenda
-legend("topright", legend = tipos, fill = cores, bty="n")
